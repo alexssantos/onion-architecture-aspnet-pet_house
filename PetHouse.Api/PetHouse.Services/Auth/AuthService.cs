@@ -26,6 +26,11 @@ namespace PetHouse.Services.Auth
             var secret = Configs.GetSection(AuthSecretOptions.AuthSecret).Value;
             var key = Encoding.ASCII.GetBytes(secret);
 
+            //Issuer - Indica a parte que esta emitindo o JWT
+            var issuer = "pethouse.net";
+            //Audience - Indica os destinatários do JWT;
+            var audience = "pethouse.net";
+
             // Configurando o token gerado.
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -37,6 +42,8 @@ namespace PetHouse.Services.Auth
                     new Claim(ClaimTypes.Role, usuario.TipoUsuarioStr),
                     new Claim(ClaimTypes.NameIdentifier, usuario.Login),
                 }),
+                Issuer = issuer,
+                Audience = audience,
                 // Tempo de expiração.
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(

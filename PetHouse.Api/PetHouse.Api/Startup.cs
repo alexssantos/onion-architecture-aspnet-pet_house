@@ -1,9 +1,13 @@
-﻿using PetHouse.Api.Configurations;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using PetHouse.Api.Configurations;
 using PetHouse.Api.IoC;
 using PetHouse.Domain.Repositories;
 using PetHouse.Persistence.Repositories;
 using PetHouse.Services;
 using PetHouse.Services.Abstractios;
+using PetHouse.Services.Auth;
+using System.Text;
 
 namespace PetHouse.Api
 {
@@ -43,6 +47,38 @@ namespace PetHouse.Api
                         builder.AllowAnyMethod();
                         builder.AllowCredentials();
                     }));
+
+            var secret = Configuration.GetSection(AuthSecretOptions.AuthSecret).Value;
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        //Issuer - Indica a parte que esta emitindo o JWT
+                        ValidateIssuer = true,
+                        ValidIssuer = "pethouse.net",
+                        //Audience - Indica os destinatários do JWT;
+                        ValidateAudience = true,
+                        ValidAudience = "pethouse.net",
+                        ValidateIssuerSigningKey = true,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secret))
+                    };
+
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnAuthenticationFailed = (context) =>
+                        {
+                            Console.WriteLine("Token Invalido: " + context.Exception.Message);
+                            return Task.CompletedTask;
+                        },
+                        OnTokenValidated = (context) =>
+                        {
+                            Console.WriteLine("Token Validp: " + context.SecurityToken);
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
 
             //Serialização - lib Microsoft - config de Enum e parametor null
             services.AddMvc()
@@ -89,6 +125,7 @@ namespace PetHouse.Api
             //middleware - Redirect HTTP to HTTPS
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
         }
     }
