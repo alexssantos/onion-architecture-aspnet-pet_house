@@ -7,15 +7,16 @@ if (args is null)
 
 var builder = WebApplication.CreateBuilder(args);
 
-var startup = new Startup(builder.Environment, builder.Configuration);
-startup.ConfigureServices(builder.Services);
-
 var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
 IConfiguration configuration = AppsettingsConfiguration.BuildToConfiguration(environment);
 
+var startup = new Startup(builder.Environment, builder.Configuration);
+startup.ConfigureServices(builder.Services);
+
+
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
-    .Enrich.FromLogContext()    
+    .Enrich.FromLogContext()
     .Enrich.WithProperty("PetHouse.Api", "PetHouse")
     .CreateLogger();
 

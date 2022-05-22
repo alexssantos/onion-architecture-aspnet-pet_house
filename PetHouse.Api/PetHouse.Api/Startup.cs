@@ -1,5 +1,9 @@
 ﻿using PetHouse.Api.Configurations;
 using PetHouse.Api.IoC;
+using PetHouse.Domain.Repositories;
+using PetHouse.Persistence.Repositories;
+using PetHouse.Services;
+using PetHouse.Services.Abstractios;
 
 namespace PetHouse.Api
 {
@@ -13,7 +17,7 @@ namespace PetHouse.Api
         protected IConfiguration Configuration;
 
         public virtual void ConfigureServices(IServiceCollection services)
-        {       
+        {
             //Handlers/Middleware - acessar contexto das requests e manipular
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -21,8 +25,14 @@ namespace PetHouse.Api
             services.AddControllers()
                 .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
 
+            //Services, repositories
+            services.AddScoped<IServiceManager, ServiceManager>();
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
+
+            //services.Configure<string>(configuration.GetSection(PositionOptions.Position));
+
             //Cors
-            services.AddCors(options =>            
+            services.AddCors(options =>
                 options.AddPolicy(
                     ApiStaticConfigurations.AppName,
                     builder =>
@@ -43,7 +53,7 @@ namespace PetHouse.Api
              });
 
             //Swagger - habilita e config o framework
-            services.UseCustomSwagger();            
+            services.UseCustomSwagger();
         }
 
         public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env)

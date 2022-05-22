@@ -8,6 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PetHouse.ContractsDto\PetHouse.ContractsDto.csproj" />
+    <ProjectReference Include="..\PetHouse.Services.Abstractios\PetHouse.Services.Abstractios.csproj" />
   </ItemGroup>
 
 </Project>

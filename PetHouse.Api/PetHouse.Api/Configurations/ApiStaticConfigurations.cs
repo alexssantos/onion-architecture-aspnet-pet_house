@@ -5,6 +5,7 @@
         //private const string projetcName = Assembly.GetCallingAssembly().GetName().Name;
         public const string AppName = "PetHouse.Api";
         public const string CorsHostsSection = "CorsHosts";
+
     }
 
     public static class SwaggerConfiguration
@@ -15,4 +16,6 @@
 
         public const string Endpoint = $"/swagger/{Version}/swagger.json";
     }
+
+
 }
