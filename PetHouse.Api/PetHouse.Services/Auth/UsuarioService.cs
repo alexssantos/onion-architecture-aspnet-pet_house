@@ -19,7 +19,6 @@ namespace PetHouse.Services.Auth
             return new UsuarioParaLoginDto()
             {
                 Email = "alex@gmail.com",
-                Login = "alex123",
                 Nome = "Alex",
                 TipoUsuarioStr = UsuarioTipo.FUNCIONARIO.ToString()
             };

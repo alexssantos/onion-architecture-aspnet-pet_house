@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="AgendaDeConsultas\" />
+    <Folder Include="Consultas\" />
     <Folder Include="Pets\" />
   </ItemGroup>
 

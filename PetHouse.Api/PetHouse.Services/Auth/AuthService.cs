@@ -40,7 +40,7 @@ namespace PetHouse.Services.Auth
                     new Claim(ClaimTypes.Name, usuario.Nome),
                     new Claim(ClaimTypes.Email, usuario.Email),
                     new Claim(ClaimTypes.Role, usuario.TipoUsuarioStr),
-                    new Claim(ClaimTypes.NameIdentifier, usuario.Login),
+                    //new Claim(ClaimTypes.NameIdentifier, usuario.Login),
                 }),
                 Issuer = issuer,
                 Audience = audience,
