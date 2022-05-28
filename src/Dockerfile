@@ -9,9 +9,11 @@ EXPOSE 443
 #original ajustado com path
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["PetHouse.Api/PetHouse.Api.csproj", "PetHouse.Api/"]
-RUN dotnet restore "PetHouse.Api/PetHouse.Api.csproj"
 COPY . .
+#Desnecessario: 
+#   COPY ["PetHouse.Api/PetHouse.Api.csproj", "PetHouse.Api/"]
+#Tvz remover pq build obrigatoriamente restaura o projeto.
+RUN dotnet restore "PetHouse.Api/PetHouse.Api.csproj"
 
 WORKDIR "/src/PetHouse.Api"
 RUN dotnet build "PetHouse.Api.csproj" -c Release -o /app/build
