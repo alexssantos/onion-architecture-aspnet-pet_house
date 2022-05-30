@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
 IConfiguration configuration = AppsettingsConfiguration.BuildToConfiguration(environment);
 
-var startup = new Startup(builder.Environment, builder.Configuration);
+var startup = new Startup(builder.Environment, configuration);
 startup.ConfigureServices(builder.Services);
 
 

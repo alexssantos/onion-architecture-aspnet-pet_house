@@ -9,12 +9,21 @@
     }
   },
   "profiles": {
-    "PetHouse.Api": {
+    "PetHouse.Api Development": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:7198;http://localhost:5198",
+      "dotnetRunMessages": true
+    },
+    "PetHouse.Api Production": {
+      "commandName": "Project",      
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
       },
       "applicationUrl": "https://localhost:7198;http://localhost:5198",
       "dotnetRunMessages": true

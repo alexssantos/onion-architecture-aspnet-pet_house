@@ -1,13 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PetHouse.Api.Configurations;
 using PetHouse.Api.IoC;
 using PetHouse.Domain.Repositories;
+using PetHouse.Persistence.Database;
 using PetHouse.Persistence.Repositories;
 using PetHouse.Services;
 using PetHouse.Services.Abstractios;
 using PetHouse.Services.Auth;
 using System.Text;
+using EnvironmentName = Microsoft.AspNetCore.Hosting.EnvironmentName;
 
 namespace PetHouse.Api
 {
@@ -33,7 +36,13 @@ namespace PetHouse.Api
             services.AddScoped<IServiceManager, ServiceManager>();
             services.AddScoped<IRepositoryManager, RepositoryManager>();
 
-            //services.Configure<string>(configuration.GetSection(PositionOptions.Position));
+            var connection = Configuration["ConnectionString:pethouse-db"];
+            services.AddDbContext<PetHouseContext>(options =>
+            {
+                options.UseMySql(connection, MySqlServerVersion.AutoDetect(connection));
+            });
+            services.AddScoped<DbContext, PetHouseContext>();
+
 
             //Cors
             services.AddCors(options =>
@@ -94,7 +103,7 @@ namespace PetHouse.Api
 
         public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() || env.EnvironmentName.Equals(EnvironmentName.Production))
                 app.UseDeveloperExceptionPage();
 
             //Swagger - config da UI do swagger
