@@ -33,6 +33,11 @@ namespace PetHouse.Persistence.Repositories.Base
             return _queryOfEntity.ToList();
         }
 
+        public async Task<IList<T>> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            return await _queryOfEntity.ToListAsync(cancellationToken);
+        }
+
         public IList<T> GetAllByCriteria(Expression<Func<T, bool>> expression)
         {
             return this._queryOfEntity.Where(expression).ToList();
@@ -43,6 +48,11 @@ namespace PetHouse.Persistence.Repositories.Base
             return _queryOfEntity.Find(id);
         }
 
+        public async Task<T> GetbyIdAsync(Guid id, CancellationToken cancellationToken = default)
+        {
+            return await _queryOfEntity.FindAsync(id, cancellationToken);
+        }
+
         public T GetOneByCriteria(Expression<Func<T, bool>> expression)
         {
             return _queryOfEntity.FirstOrDefault(expression);
@@ -51,7 +61,11 @@ namespace PetHouse.Persistence.Repositories.Base
         public T Save(T entity)
         {
             _queryOfEntity.Add(entity);
-            _context.SaveChanges();
+            return entity;
+        }
+        public T SaveAsync(T entity, CancellationToken cancellationToken = default)
+        {
+            _queryOfEntity.AddAsync(entity, cancellationToken);
             return entity;
         }
 
@@ -59,14 +73,17 @@ namespace PetHouse.Persistence.Repositories.Base
         {
             _queryOfEntity.Update(entity);
             _context.Entry(entity).State = EntityState.Modified;
-            _context.SaveChanges();
             return entity;
         }
 
-        public int SaveMany(ICollection<T> entities)
+        public void SaveMany(ICollection<T> entities)
         {
             _queryOfEntity.AddRange(entities);
-            return _context.SaveChanges();
+        }
+
+        public async Task SaveManyAsync(ICollection<T> entities, CancellationToken cancellationToken = default)
+        {
+            await _queryOfEntity.AddRangeAsync(entities, cancellationToken);
         }
     }
 }
