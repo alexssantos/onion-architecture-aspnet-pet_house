@@ -11,34 +11,34 @@ namespace PetHouse.Persistence.Database.Mappers
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id)
-                .HasField("id_usuario")
+                .HasColumnName("id_usuario")
                 .ValueGeneratedNever()
                 .IsRequired();
 
             builder.Property(x => x.Password)
-                .HasField("str_password")
+                .HasColumnName("str_password")
                 .IsRequired();
 
             builder.Property(x => x.TipoUsuario)
-                .HasField("int_tipo")
+                .HasColumnName("int_tipo")
                 .IsRequired();
 
             builder.Property(x => x.Email)
-                .HasField("str_email");
+                .HasColumnName("str_email");
 
             builder.Property(x => x.Nome)
-                .HasField("str_nome");
+                .HasColumnName("str_nome");
 
             builder.Property(x => x.DataNascimento)
-                .HasField("dt_nascimento");
+                .HasColumnName("dt_nascimento");
 
             // === aditamento ===
             builder.Property(x => x.DataCriacao)
-                .HasField("dt_criacao")
+                .HasColumnName("dt_criacao")
                 .IsRequired();
 
             builder.Property(x => x.DataUltimaAtualizacao)
-                .HasField("dt_atualizacao");
+                .HasColumnName("dt_atualizacao");
 
 
             // ==== relationshiops ====
