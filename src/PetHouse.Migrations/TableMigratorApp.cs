@@ -32,12 +32,17 @@ namespace PetHouse.Migrations
                 .ConfigureRunner(rb => rb
                     //Adiciona suporte ao Mysql
                     .AddMySql5()
+
                     //Define a string de conexão
                     .WithGlobalConnectionString(ConfigUtils.GetConnectionString())
+
                     //Define o assembly onde estão as migrações
-                    .WithMigrationsIn(typeof(_001_MigracaoInicial).Assembly))
+                    //.WithMigrationsIn(typeof(_001_MigracaoInicial).Assembly))
+                    .ScanIn(typeof(_001_MigracaoInicial).Assembly).For.Migrations())
+
                 //Habilita o log de console no caminho do FluentMigrator
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
+
                 //Constroi o provedor de serviço
                 .BuildServiceProvider(false);
         }
