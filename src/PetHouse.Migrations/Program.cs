@@ -12,7 +12,6 @@ try
 
     var (isDowngrade, version) = CheckArgs(args);
 
-    //if (!CheckDbConnection()) throw new Exception();
     CheckDbConnection();
 
     var migrationTables = new TableMigratorApp();
@@ -58,7 +57,7 @@ catch (Exception ex)
     return (isDowngrade, version);
 }
 
-bool CheckDbConnection()
+void CheckDbConnection()
 {
     var connectionDB = new MySqlConnection(ConfigUtils.GetConnectionString());
 
@@ -71,7 +70,7 @@ bool CheckDbConnection()
     {
         ConsoleExtensions.ShowError(
             $"Erro ao estabelecer conexao com o Banco de Dados: {ex.Message}");
-        return false;
+        throw;
     }
     finally
     {
@@ -80,5 +79,4 @@ bool CheckDbConnection()
     }
 
     connectionDB.Dispose();
-    return true;
 }
