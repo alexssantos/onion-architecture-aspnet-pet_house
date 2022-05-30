@@ -42,7 +42,9 @@ namespace PetHouse.Persistence.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(UsuarioTableMap).Assembly);
+            //modelBuilder.ApplyConfigurationsFromAssembly(typeof(UsuarioTableMap).Assembly);
+            modelBuilder
+                .ApplyConfiguration(new UsuarioTableMap());
 
             base.OnModelCreating(modelBuilder);
         }

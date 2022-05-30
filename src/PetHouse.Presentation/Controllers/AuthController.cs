@@ -20,24 +20,17 @@ namespace PetHouse.Presentation.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public ActionResult Login([FromBody] AuthLoginRequest loginForm)
+        public async Task<IActionResult> Login([FromBody] AuthLoginRequest loginForm, CancellationToken cancellationToken = default)
         {
-            var user = ServiceManager.UsuarioService.ObterUsuarioParaLogin();
-
-            if (user == null)
-                return NotFound(new { message = "Usuário ou senha inválidos." });
-
+            var user = await ServiceManager.UsuarioService.ObterUsuarioParaLoginAsync(loginForm.Usuario, loginForm.Senha, cancellationToken);
             var token = ServiceManager.AuthService.GerarToken(user);
-            loginForm.Senha = "";
 
             return Ok(new
             {
-                user = user,
-                //tipoUsuario = user.TipoUsuario,
+                usuario = user,
                 token = token
             });
         }
-
 
         [HttpGet]
         [Route("anonimo")]
