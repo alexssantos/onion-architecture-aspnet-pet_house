@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "PetHouse.Migrations": {
+      "commandName": "Project",
+      "commandLineArgs": "dev up"
+    },
+    "Development": {
+      "commandName": "Project",
+      "commandLineArgs": "dev up"
+    }
+  }
+}
