@@ -6,9 +6,9 @@ on:
 env:
   AZURE_WEBAPP_NAME: PetHouse
   DOTNET_CORE_VERSION: 6.0.x
-  WORKING_DIRECTORY: PetHouse.Api
+  WORKING_DIRECTORY: src/PetHouse.Api
   CONFIGURATION: Release
-  AZURE_WEBAPP_PACKAGE_PATH: PetHouse.Api/publish
+  AZURE_WEBAPP_PACKAGE_PATH: src/PetHouse.Api/publish
   AZURE_APIM_RESOURCE_PATH: /pethouse
   AZURE_APIM_RESOURCEGROUP: testdev
   AZURE_APIM_SERVICENAME: PetHouseApiAzureApiSeriveMgr
@@ -16,8 +16,8 @@ env:
   AZURE_APIM_APPSERVICEURL: https://pethouse.azurewebsites.net
   SWASHBUCLE_ASPNET_CORE_CLI_PACKAGE_VERSION: 5.6.3
   SWASHBUCKLE_DOTNET_CORE_VERSION: 3.1.x
-  API_IMPORT_SPECIFICATION_PATH: PetHouse.Api/publish/swagger.json
-  API_IMPORT_DLL: PetHouse.Api/publish/PetHouse.Api.dll
+  API_IMPORT_SPECIFICATION_PATH: src/PetHouse.Api/publish/swagger.json
+  API_IMPORT_DLL: src/PetHouse.Api/publish/PetHouse.Api.dll
   API_IMPORT_VERSION: v1
 jobs:
   build:
