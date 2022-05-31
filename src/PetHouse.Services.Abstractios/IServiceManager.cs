@@ -5,5 +5,6 @@
         IAuthService AuthService { get; }
         IUsuarioService UsuarioService { get; }
         IPetService PetService { get; }
+        IConsultaVeterinariaService ConsultaVeterinariaService { get; }
     }
 }

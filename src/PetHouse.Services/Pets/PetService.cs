@@ -4,7 +4,7 @@ using PetHouse.Services.Abstractios;
 
 namespace PetHouse.Services.Pets
 {
-    public class PetService : IPetService
+    internal sealed class PetService : IPetService
     {
         private readonly IRepositoryManager _repositoryManager;
 

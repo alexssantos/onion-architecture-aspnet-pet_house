@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Consultas\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PetHouse.Domain\PetHouse.Domain.csproj" />
     <ProjectReference Include="..\PetHouse.Services.Abstractios\PetHouse.Services.Abstractios.csproj" />
   </ItemGroup>

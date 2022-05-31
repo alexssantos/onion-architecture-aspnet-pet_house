@@ -1,4 +1,5 @@
-﻿using PetHouse.Domain.Commons;
+﻿using PetHouse.ContractsDto.Consulta;
+using PetHouse.Domain.Commons;
 using PetHouse.Domain.Pets;
 using PetHouse.Domain.Usuarios;
 
@@ -14,5 +15,15 @@ namespace PetHouse.Domain.Consultas
         public virtual Pet Pet { get; set; }
         public Guid AgendadorId { get; set; }
         public virtual Usuario Agendador { get; set; }
+
+        public ConsultaVeterinariaDto ToDto()
+        {
+            return new ConsultaVeterinariaDto()
+            {
+                DataDaConsulta = DataDaConsulta,
+                Descricao = Descricao,
+                NomeAnimal = Pet.Nome
+            };
+        }
     }
 }
