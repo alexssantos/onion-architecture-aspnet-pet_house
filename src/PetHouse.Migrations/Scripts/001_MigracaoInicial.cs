@@ -11,6 +11,7 @@ namespace PetHouse.Migrations.Scripts
 
         public override void Up()
         {
+
         }
     }
 }
