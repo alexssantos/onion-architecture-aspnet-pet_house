@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "apis1": {
+      "apiEndpoint": "https://pethouseapiazureapiserivemgr.azure-api.net/pethouse",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/PetHouseApiAzureApiSeriveMgr/apis/PetHouseApi",
+      "type": "apis.azure"
+    }
+  }
+}
