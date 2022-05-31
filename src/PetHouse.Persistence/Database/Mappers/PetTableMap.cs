@@ -8,6 +8,8 @@ namespace PetHouse.Persistence.Database.Mappers
     {
         public void Configure(EntityTypeBuilder<Pet> builder)
         {
+            builder.ToTable("pet");
+
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id)

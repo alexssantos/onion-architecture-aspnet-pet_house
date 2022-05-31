@@ -8,6 +8,8 @@ namespace PetHouse.Persistence.Database.Mappers
     {
         public void Configure(EntityTypeBuilder<ConsultaVeterinaria> builder)
         {
+            builder.ToTable("consulta_veterinaria");
+
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id)
@@ -31,7 +33,6 @@ namespace PetHouse.Persistence.Database.Mappers
             builder.Property(x => x.DataDaConsulta)
                 .HasColumnName("dt_consulta")
                 .IsRequired();
-
 
             // === aditamento ===
             builder.Property(x => x.DataCriacao)
