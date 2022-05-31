@@ -24,5 +24,13 @@ namespace PetHouse.Presentation.Controllers
             var user = await _serviceManager.UsuarioService.CriarUsuarioFuncionario(usuario, cancellationToken);
             return Ok(user);
         }
+
+        [HttpGet]
+        [Route("todos")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ObterTodos(CancellationToken cancellationToken = default)
+        {
+            return Ok(await _serviceManager.UsuarioService.ObterTodosAsync(cancellationToken));
+        }
     }
 }

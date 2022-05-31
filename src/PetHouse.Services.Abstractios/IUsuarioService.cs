@@ -7,5 +7,6 @@ namespace PetHouse.Services.Abstractios
     {
         Task<UsuarioParaLoginDto> ObterUsuarioParaLoginAsync(string email, string senha, CancellationToken cancellationToken);
         Task<UsuarioParaLoginDto> CriarUsuarioFuncionario(UsuarioParaCriacaoDto formUsuario, CancellationToken cancellationToken = default);
+        Task<IEnumerable<UsuarioParaLoginDto>> ObterTodosAsync(CancellationToken cancellationToken);
     }
 }
