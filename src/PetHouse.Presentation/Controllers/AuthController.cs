@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PetHouse.ContractsDto.Auth;
 using PetHouse.Services.Abstractios;
@@ -16,10 +17,12 @@ namespace PetHouse.Presentation.Controllers
             ServiceManager = serviceManager;
         }
 
-
         [HttpPost]
-        [Route("login")]
         [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Route("login")]
         public async Task<IActionResult> Login([FromBody] AuthLoginRequest loginForm, CancellationToken cancellationToken = default)
         {
             var user = await ServiceManager.UsuarioService.ObterUsuarioParaLoginAsync(loginForm.Usuario, loginForm.Senha, cancellationToken);
@@ -33,23 +36,34 @@ namespace PetHouse.Presentation.Controllers
         }
 
         [HttpGet]
-        [Route("anonimo")]
         [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Route("anonimo")]
         public string Anonimo() => "Você está habilitado no modo anônimo.";
 
         [HttpGet]
-        [Route("autenticado")]
         [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Route("autenticado")]
         public string Autenticado() => string.Format("Você está Autenticado - {0}.", User.Identity?.Name);
 
         [HttpGet]
-        [Route("funcionario")]
         [Authorize(Roles = "FUNCIONARIO")]
-        public string Funcionario() => string.Format("Você é uma funcionario autorizadO - {0}.", User.Identity?.Name);
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Route("funcionario")]
+        public string Funcionario() => string.Format("Você é uma FUNCIONARIO autorizado - {0}.", User.Identity?.Name);
 
         [HttpGet]
-        [Route("cliente")]
         [Authorize(Roles = "CLIENTE")]
-        public string Cliente() => string.Format("Você é um cliente autorizado - {0}.", User.Identity?.Name);
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Route("cliente")]
+        public string Cliente() => string.Format("Você é um CLIENTE autorizado - {0}.", User.Identity?.Name);
     }
 }
