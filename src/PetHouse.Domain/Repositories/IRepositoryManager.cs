@@ -4,5 +4,6 @@
     {
         IUnitOfWork UnitOfWork { get; }
         IUsuarioRepositorio UsuarioRepositorio { get; }
+        IPetRepository PetRepositorio { get; }
     }
 }

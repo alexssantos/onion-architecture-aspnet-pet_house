@@ -1,4 +1,5 @@
-﻿using PetHouse.Domain.Repositories;
+﻿using PetHouse.ContractsDto.Pet;
+using PetHouse.Domain.Repositories;
 using PetHouse.Services.Abstractios;
 
 namespace PetHouse.Services.Pets
@@ -10,6 +11,12 @@ namespace PetHouse.Services.Pets
         public PetService(IRepositoryManager repositoryManager)
         {
             _repositoryManager = repositoryManager;
+        }
+
+        public async Task<IEnumerable<PetDto>> ObterTodosAsync(CancellationToken cancellationToken)
+        {
+            var pets = await _repositoryManager.PetRepositorio.GetAllAsync(cancellationToken);
+            return pets.Select(pet => pet.ToPetDto());
         }
     }
 }

@@ -3,11 +3,9 @@ using PetHouse.ContractsDto.Usuario;
 using PetHouse.Domain.Commons;
 using PetHouse.Domain.Consultas;
 using PetHouse.Domain.Usuarios.Enum;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PetHouse.Domain.Usuarios
 {
-    [Table("usuario")]
     public class Usuario : Entity
     {
         public string Password { get; set; }
@@ -16,7 +14,6 @@ namespace PetHouse.Domain.Usuarios
         public DateTime? DataNascimento { get; set; }
         public UsuarioTipo TipoUsuario { get; set; }
 
-        public Guid ConsultaVeterinariaId { get; set; }
         public virtual ICollection<ConsultaVeterinaria> ConsultasAgendadas { get; set; }
 
         public UsuarioParaLoginDto ToUsuarioLogin()

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PetHouse.ContractsDto.Auth;
+using PetHouse.ContractsDto.Pet;
 using PetHouse.Services.Abstractios;
 using System.Net.Mime;
 
@@ -21,14 +21,14 @@ namespace PetHouse.Presentation.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<UsuarioParaLoginDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<PetDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Route("todos")]
         public async Task<IActionResult> ObterTodos(CancellationToken cancellationToken = default)
         {
-            return Ok(await _serviceManager.UsuarioService.ObterTodosAsync(cancellationToken));
+            return Ok(await _serviceManager.PetService.ObterTodosAsync(cancellationToken));
         }
     }
 }

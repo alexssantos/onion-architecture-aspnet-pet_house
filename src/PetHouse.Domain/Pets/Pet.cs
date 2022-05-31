@@ -1,4 +1,5 @@
-﻿using PetHouse.Domain.Commons;
+﻿using PetHouse.ContractsDto.Pet;
+using PetHouse.Domain.Commons;
 using PetHouse.Domain.Consultas;
 
 namespace PetHouse.Domain.Pets
@@ -10,6 +11,16 @@ namespace PetHouse.Domain.Pets
         public string NomeDoDono { get; set; }
 
         public virtual ICollection<ConsultaVeterinaria> ListaDeConsultaVeterinaria { get; set; }
+
+        public PetDto ToPetDto()
+        {
+            return new PetDto
+            {
+                Nome = Nome,
+                DataDeNascimento = DataDeNascimento,
+                NomeDoDOne = NomeDoDono,
+            };
+        }
 
     }
 }
