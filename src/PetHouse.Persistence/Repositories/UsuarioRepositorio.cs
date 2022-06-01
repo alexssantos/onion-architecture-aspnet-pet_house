@@ -5,9 +5,9 @@ using PetHouse.Persistence.Repositories.Base;
 
 namespace PetHouse.Persistence.Repositories
 {
-    internal sealed class UsuarioRepositorio : RepositoryBase<Usuario>, IUsuarioRepositorio
+    internal sealed class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepositorio
     {
-        public UsuarioRepositorio(PetHouseContext context) : base(context)
+        public UsuarioRepository(PetHouseContext context) : base(context)
         {
         }
     }

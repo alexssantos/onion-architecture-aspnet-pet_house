@@ -16,6 +16,8 @@ namespace PetHouse.Migrations.Scripts
                 .WithColumn("id_pet").AsGuid().PrimaryKey()
                 .WithColumn("str_nome").AsString(120)
                 .WithColumn("str_nome_dono").AsString(120)
+                .WithColumn("str_cpf_dono").AsString(120)
+                .WithColumn("str_tipo_animal").AsString(120)
                 .WithColumn("dt_nascimento").AsDateTime2()
                 .WithColumn("dt_criacao").AsDateTime2()
                 .WithColumn("dt_atualizacao").AsDateTime2().Nullable();

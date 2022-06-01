@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PetHouse.Domain.Consultas;
+using PetHouse.Domain.Pets;
 using PetHouse.Domain.Usuarios;
 using PetHouse.Persistence.Database.Mappers;
 
@@ -6,12 +8,11 @@ namespace PetHouse.Persistence.Database
 {
     public sealed class PetHouseContext : DbContext
     {
-        public PetHouseContext(DbContextOptions options) : base(options)
-        {
-
-        }
+        public PetHouseContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Pet> Pets { get; set; }
+        public DbSet<ConsultaVeterinaria> ConsultasVeterinaria { get; set; }
 
         #region Save Methods
         public override int SaveChanges()
@@ -42,9 +43,8 @@ namespace PetHouse.Persistence.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.ApplyConfigurationsFromAssembly(typeof(UsuarioTableMap).Assembly);
-            modelBuilder
-                .ApplyConfiguration(new UsuarioTableMap());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(UsuarioTableMap).Assembly);
+            //modelBuilder.ApplyConfiguration(new UsuarioTableMap());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -8,6 +8,8 @@ namespace PetHouse.Persistence.Database.Mappers
     {
         public void Configure(EntityTypeBuilder<Pet> builder)
         {
+            builder.ToTable("pet");
+
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id)
@@ -21,6 +23,14 @@ namespace PetHouse.Persistence.Database.Mappers
 
             builder.Property(x => x.NomeDoDono)
                 .HasColumnName("str_nome_dono")
+                .IsRequired();
+
+            builder.Property(x => x.CpfDoDono)
+                .HasColumnName("str_cpf_dono")
+                .IsRequired();
+
+            builder.Property(x => x.TipoDeAnimal)
+                .HasColumnName("str_tipo_animal")
                 .IsRequired();
 
             builder.Property(x => x.DataDeNascimento)

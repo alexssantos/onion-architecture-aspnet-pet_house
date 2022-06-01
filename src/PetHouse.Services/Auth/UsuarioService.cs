@@ -47,10 +47,10 @@ namespace PetHouse.Services.Auth
             return usuario.ToUsuarioLogin();
         }
 
-        public async Task<IEnumerable<UsuarioParaLoginDto>> ObterTodosAsync(CancellationToken cancellationToken)
+        public async Task<IEnumerable<UsuarioDto>> ObterTodosAsync(CancellationToken cancellationToken)
         {
             var usuarios = await _repositoryManager.UsuarioRepositorio.GetAllAsync(cancellationToken);
-            return usuarios.Select(a => a.ToUsuarioLogin());
+            return usuarios.Select(a => a.ToDto());
         }
     }
 }

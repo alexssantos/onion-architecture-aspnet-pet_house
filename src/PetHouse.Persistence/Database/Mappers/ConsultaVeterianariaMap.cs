@@ -8,6 +8,8 @@ namespace PetHouse.Persistence.Database.Mappers
     {
         public void Configure(EntityTypeBuilder<ConsultaVeterinaria> builder)
         {
+            builder.ToTable("consulta_veterinaria");
+
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id)
@@ -32,7 +34,6 @@ namespace PetHouse.Persistence.Database.Mappers
                 .HasColumnName("dt_consulta")
                 .IsRequired();
 
-
             // === aditamento ===
             builder.Property(x => x.DataCriacao)
                 .HasColumnName("dt_criacao")
@@ -52,6 +53,11 @@ namespace PetHouse.Persistence.Database.Mappers
                 .WithMany(x => x.ConsultasAgendadas)
                 .HasForeignKey(x => x.AgendadorId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            // navigaton prop
+
+            builder.Navigation(e => e.Pet).AutoInclude();
+            builder.Navigation(e => e.Agendador).AutoInclude();
         }
     }
 }

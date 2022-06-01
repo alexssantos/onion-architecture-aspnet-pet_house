@@ -49,12 +49,12 @@ namespace PetHouse.Persistence.Repositories.Base
 
         public T GetbyId(Guid id)
         {
-            return _queryOfEntity.Find(id);
+            return _queryOfEntity.FirstOrDefault(x => x.Id == id);
         }
 
         public async Task<T> GetbyIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            return await _queryOfEntity.FindAsync(id, cancellationToken);
+            return await _queryOfEntity.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
         public T GetOneByCriteria(Expression<Func<T, bool>> expression)
