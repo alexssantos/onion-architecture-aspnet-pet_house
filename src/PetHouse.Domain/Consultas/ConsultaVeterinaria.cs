@@ -22,8 +22,32 @@ namespace PetHouse.Domain.Consultas
             {
                 DataDaConsulta = DataDaConsulta,
                 Descricao = Descricao,
-                NomeAnimal = Pet.Nome
+                NomeAnimal = Pet.Nome,
+                NomeDoDono = Pet.NomeDoDono,
+                CpfDoDono = Pet.CpfDoDono,
             };
+        }
+
+        public static ConsultaVeterinaria Criar(NovaConsulta nova)
+        {
+            return new ConsultaVeterinaria
+            {
+                AgendadorId = nova.AgendadorId,
+                PetId = nova.PetId,
+                Descricao = nova.Descricao,
+                DataDaConsulta = nova.DataDaConsulta,
+            };
+        }
+
+        public ConsultaVeterinaria AtualizarPor(NovaConsulta nova)
+        {
+            AgendadorId = nova.AgendadorId;
+            PetId = nova.PetId;
+            Descricao = nova.Descricao;
+            DataDaConsulta = nova.DataDaConsulta;
+            DataUltimaAtualizacao = DateTime.Now;
+
+            return this;
         }
     }
 }

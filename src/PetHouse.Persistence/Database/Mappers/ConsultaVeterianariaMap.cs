@@ -53,6 +53,11 @@ namespace PetHouse.Persistence.Database.Mappers
                 .WithMany(x => x.ConsultasAgendadas)
                 .HasForeignKey(x => x.AgendadorId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            // navigaton prop
+
+            builder.Navigation(e => e.Pet).AutoInclude();
+            builder.Navigation(e => e.Agendador).AutoInclude();
         }
     }
 }
