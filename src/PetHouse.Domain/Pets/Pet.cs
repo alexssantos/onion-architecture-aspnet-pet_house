@@ -27,6 +27,18 @@ namespace PetHouse.Domain.Pets
             };
         }
 
+        public Pet AtualizarPor(NovoPet pet)
+        {
+            CpfDoDono = pet.CpfDoDone;
+            NomeDoDono = pet.NomeDoDone;
+            DataDeNascimento = pet.DataDeNascimento;
+            Nome = pet.Nome;
+            TipoDeAnimal = pet.TipoDeAnimal;
+            DataUltimaAtualizacao = DateTime.Now;
+
+            return this;
+        }
+
         public PetDto ToPetDto()
         {
             return new PetDto
@@ -37,6 +49,5 @@ namespace PetHouse.Domain.Pets
                 NomeDoDOne = NomeDoDono,
             };
         }
-
     }
 }

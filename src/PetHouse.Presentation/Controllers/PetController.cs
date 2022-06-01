@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PetHouse.ContractsDto.Pet;
 using PetHouse.Services.Abstractios;
@@ -7,7 +6,7 @@ using System.Net.Mime;
 
 namespace PetHouse.Presentation.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/pets")]
     [ApiController]
     [Produces(MediaTypeNames.Application.Json)]
@@ -29,14 +28,35 @@ namespace PetHouse.Presentation.Controllers
             return Ok(await _serviceManager.PetService.ObterTodosAsync(cancellationToken));
         }
 
-        [ProducesResponseType(typeof(IEnumerable<PetDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PetDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost, Route("cadastro")]
         public async Task<IActionResult> CadastrarPet([FromBody] NovoPet novoPet, CancellationToken cancellationToken = default)
         {
-            return Ok(await _serviceManager.PetService.Cadastrar(novoPet, cancellationToken));
+            return Ok(await _serviceManager.PetService.CadastrarAsync(novoPet, cancellationToken));
+        }
+
+        [ProducesResponseType(typeof(PetDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpPut, Route("alterar/{petId}")]
+        public async Task<IActionResult> CadastrarPet([FromRoute] Guid petId, [FromBody] NovoPet novoPet, CancellationToken cancellationToken = default)
+        {
+            return Ok(await _serviceManager.PetService.AtualizarAsync(petId, novoPet, cancellationToken));
+        }
+
+        [ProducesResponseType(typeof(PetDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpDelete, Route("excluir/{petId}")]
+        public async Task<IActionResult> ExcluirPet([FromRoute] Guid petId, CancellationToken cancellationToken = default)
+        {
+            await _serviceManager.PetService.ExcluirAsync(petId, cancellationToken);
+            return Ok();
         }
     }
 }
