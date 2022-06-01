@@ -112,8 +112,6 @@ namespace PetHouse.Api
             //if (!env.IsEnvironment("Production"))
             app.UseCustomSwaggerUI();
 
-            app.UseMiddleware<ExceptionHandlingMiddleware>();
-
             app.ConfigureRequestHandlingPipeline();
 
             app.UseEndpoints(endponts =>
@@ -140,6 +138,8 @@ namespace PetHouse.Api
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
         }
     }
 }
