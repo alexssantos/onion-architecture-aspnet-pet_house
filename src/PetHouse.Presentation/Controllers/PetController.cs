@@ -20,15 +20,23 @@ namespace PetHouse.Presentation.Controllers
             _serviceManager = serviceManager;
         }
 
-        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<PetDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpGet, Route("todos")]
+        public async Task<IActionResult> ObterTodos(CancellationToken cancellationToken = default)
+        {
+            return Ok(await _serviceManager.PetService.ObterTodosAsync(cancellationToken));
+        }
+
         [ProducesResponseType(typeof(IEnumerable<PetDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [Route("todos")]
-        public async Task<IActionResult> ObterTodos(CancellationToken cancellationToken = default)
+        [HttpPost, Route("cadastro")]
+        public async Task<IActionResult> CadastrarPet([FromBody] NovoPet novoPet, CancellationToken cancellationToken = default)
         {
-            return Ok(await _serviceManager.PetService.ObterTodosAsync(cancellationToken));
+            return Ok(await _serviceManager.PetService.Cadastrar(novoPet, cancellationToken));
         }
     }
 }

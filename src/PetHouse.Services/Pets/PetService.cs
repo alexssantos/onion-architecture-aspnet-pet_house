@@ -1,4 +1,5 @@
 ﻿using PetHouse.ContractsDto.Pet;
+using PetHouse.Domain.Pets;
 using PetHouse.Domain.Repositories;
 using PetHouse.Services.Abstractios;
 
@@ -11,6 +12,12 @@ namespace PetHouse.Services.Pets
         public PetService(IRepositoryManager repositoryManager)
         {
             _repositoryManager = repositoryManager;
+        }
+
+        public async Task<PetDto> Cadastrar(NovoPet novoPet, CancellationToken cancellationToken)
+        {
+            var criado = await _repositoryManager.PetRepositorio.InsertAsync(Pet.Criar(novoPet));
+            return criado.ToPetDto();
         }
 
         public async Task<IEnumerable<PetDto>> ObterTodosAsync(CancellationToken cancellationToken)

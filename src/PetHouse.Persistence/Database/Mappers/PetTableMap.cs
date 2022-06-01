@@ -25,6 +25,14 @@ namespace PetHouse.Persistence.Database.Mappers
                 .HasColumnName("str_nome_dono")
                 .IsRequired();
 
+            builder.Property(x => x.CpfDoDono)
+                .HasColumnName("str_cpf_dono")
+                .IsRequired();
+
+            builder.Property(x => x.TipoDeAnimal)
+                .HasColumnName("str_tipo_animal")
+                .IsRequired();
+
             builder.Property(x => x.DataDeNascimento)
                 .HasColumnName("dt_nascimento");
 

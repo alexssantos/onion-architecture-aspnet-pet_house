@@ -5,5 +5,6 @@ namespace PetHouse.Services.Abstractios
     public interface IPetService
     {
         Task<IEnumerable<PetDto>> ObterTodosAsync(CancellationToken cancellationToken);
+        Task<PetDto> Cadastrar(NovoPet novoPet, CancellationToken cancellationToken);
     }
 }
