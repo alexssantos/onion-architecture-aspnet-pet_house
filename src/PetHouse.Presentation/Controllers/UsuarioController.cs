@@ -32,7 +32,7 @@ namespace PetHouse.Presentation.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(IEnumerable<UsuarioParaLoginDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<UsuarioDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Route("todos")]
         public async Task<IActionResult> ObterTodos(CancellationToken cancellationToken = default)

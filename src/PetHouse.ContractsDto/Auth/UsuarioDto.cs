@@ -2,8 +2,9 @@
 
 namespace PetHouse.ContractsDto.Auth
 {
-    public class UsuarioParaLoginDto
+    public class UsuarioDto
     {
+        public Guid UsuarioId { get; set; }
         public string Email { get; set; }
         public string Nome { get; set; }
 

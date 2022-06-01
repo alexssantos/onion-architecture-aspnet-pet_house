@@ -26,6 +26,17 @@ namespace PetHouse.Domain.Usuarios
             };
         }
 
+        public UsuarioDto ToDto()
+        {
+            return new UsuarioDto()
+            {
+                UsuarioId = Id,
+                Email = Email,
+                Nome = Nome,
+                TipoUsuarioStr = TipoUsuario.ToString()
+            };
+        }
+
         public static Usuario CreateUsuario(UsuarioParaCriacaoDto usuarioParaCriacao)
         {
             var tipoOk = System.Enum.TryParse(usuarioParaCriacao.TipoUsuarioStr, out UsuarioTipo tipoUsuario);
