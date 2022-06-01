@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PetHouse.Api.Configurations;
 using PetHouse.Api.IoC;
+using PetHouse.Api.Middleware;
 using PetHouse.Domain.Repositories;
 using PetHouse.Persistence.Database;
 using PetHouse.Persistence.Repositories;
@@ -43,6 +44,7 @@ namespace PetHouse.Api
             });
             services.AddScoped<DbContext, PetHouseContext>();
 
+            services.AddTransient<ExceptionHandlingMiddleware>();
 
             //Cors
             services.AddCors(options =>
@@ -109,6 +111,8 @@ namespace PetHouse.Api
             //Swagger - config da UI do swagger
             //if (!env.IsEnvironment("Production"))
             app.UseCustomSwaggerUI();
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.ConfigureRequestHandlingPipeline();
 
