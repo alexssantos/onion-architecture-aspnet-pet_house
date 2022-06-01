@@ -107,8 +107,8 @@ namespace PetHouse.Api
                 app.UseDeveloperExceptionPage();
 
             //Swagger - config da UI do swagger
-            if (!env.IsEnvironment("Production"))
-                app.UseCustomSwaggerUI();
+            //if (!env.IsEnvironment("Production"))
+            app.UseCustomSwaggerUI();
 
             app.ConfigureRequestHandlingPipeline();
 
