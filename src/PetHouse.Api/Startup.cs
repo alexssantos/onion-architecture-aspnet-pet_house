@@ -39,7 +39,7 @@ namespace PetHouse.Api
 
             var connection = Configuration["ConnectionString:pethouse-db"];
             var fileFullPathCertif = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "certif"))[0];
-            //connection = connection + $"SslCa={fileFullPathCertif};";
+            connection = connection + $"SslCa={fileFullPathCertif};";
             services.AddDbContext<PetHouseContext>(options =>
             {
                 options.UseMySql(connection, MySqlServerVersion.AutoDetect(connection));
