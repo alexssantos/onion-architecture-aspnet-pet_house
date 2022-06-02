@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-	<Content Include="certif\AzureDatabaseCertCA.crt" CopyToOutputDirectory="Always" />
+	<Content Include="certif\AzureDatabaseCertCA.crt" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
