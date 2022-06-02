@@ -19,16 +19,21 @@
 
   <ItemGroup>
 	<None Include="..\.editorconfig" Link=".editorconfig" />
+	<!--<None Include="$(SolutionDir)certif\**" CopyToOutputDirectory="PreserveNewest" LinkBase="certif\" />-->
   </ItemGroup>
-	<ItemGroup>
-<!--<Content Include="..\Shared\SharedSettings.json" Link="SharedSettings.json" CopyToOutputDirectory="PreserveNewest" />-->
-	<Content Include="..\certif\AzureDatabaseMysql_DigiCertGlobalRootCA.crt" Link="AzureDatabaseCertCA.crt" CopyToOutputDirectory="certif" />
-	</ItemGroup>
+
+  <ItemGroup>
+	<Content Include="certif\AzureDatabaseCertCA.crt" Link="linkFiles\AzureDatabaseCertCA.crt" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 
   <ItemGroup>
 	<ProjectReference Include="..\PetHouse.Persistence\PetHouse.Persistence.csproj" />
 	<ProjectReference Include="..\PetHouse.Presentation\PetHouse.Presentation.csproj" />
 	<ProjectReference Include="..\PetHouse.Services\PetHouse.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="certif\" />
   </ItemGroup>
 
 </Project>
