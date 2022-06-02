@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PetHouse.ContractsDto.Auth;
 using PetHouse.Services.Abstractios;
+using System.Net.Mime;
 
 namespace PetHouse.Presentation.Controllers
 {
     [Route("api/auth")]
     [ApiController]
+    [Produces(MediaTypeNames.Application.Json)]
     public class AuthController : ControllerBase
     {
         private IServiceManager ServiceManager;

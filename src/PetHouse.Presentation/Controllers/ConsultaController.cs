@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PetHouse.ContractsDto.Consulta;
 using PetHouse.Services.Abstractios;
@@ -6,7 +7,7 @@ using System.Net.Mime;
 
 namespace PetHouse.Presentation.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/consuta-veterinaria")]
     [ApiController]
     [Produces(MediaTypeNames.Application.Json)]

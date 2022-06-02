@@ -1,21 +1,25 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PetHouse.ContractsDto.Auth;
 using PetHouse.ContractsDto.Usuario;
 using PetHouse.Services.Abstractios;
+using System.Net.Mime;
 
 namespace PetHouse.Presentation.Controllers
 {
     [Route("api/usuario")]
     [ApiController]
+    [Produces(MediaTypeNames.Application.Json)]
     public class UsuarioController : ControllerBase
     {
         private readonly IServiceManager _serviceManager;
-
-        public UsuarioController(IServiceManager serviceManager)
+        private readonly ILogger<UsuarioController> _logger;
+        public UsuarioController(IServiceManager serviceManager, ILogger<UsuarioController> logger)
         {
             _serviceManager = serviceManager;
+            _logger = logger;
         }
 
         [HttpPost]
