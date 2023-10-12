@@ -17,9 +17,13 @@
 	<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
-  <ItemGroup>
-	<!--<None Include="..\.editorconfig" Link=".editorconfig" />-->
+  <ItemGroup><!--<None Include="..\.editorconfig" Link=".editorconfig" />-->
 	<!--<None Include="$(SolutionDir)certif\**" CopyToOutputDirectory="PreserveNewest" LinkBase="certif\" />-->
+  
+    <Compile Remove="publish\**" />
+    <Content Remove="publish\**" />
+    <EmbeddedResource Remove="publish\**" />
+    <None Remove="publish\**" />
   </ItemGroup>
 
   <ItemGroup>
