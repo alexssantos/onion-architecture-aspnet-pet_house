@@ -46,7 +46,7 @@ namespace PetHouse.Presentation.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPut, Route("alterar/{consultaId}")]
-        public async Task<IActionResult> CadastrarConsulta([FromRoute] Guid consultaId, [FromBody] NovaConsulta novaConsulta, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> AtualizarConsulta([FromRoute] Guid consultaId, [FromBody] NovaConsulta novaConsulta, CancellationToken cancellationToken = default)
         {
             return Ok(await _serviceManager.ConsultaVeterinariaService.AtualizarAsync(consultaId, novaConsulta, cancellationToken));
         }

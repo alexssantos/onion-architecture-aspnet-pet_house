@@ -41,8 +41,9 @@ namespace PetHouse.Api
             services.AddDbContext<PetHouseContext>(options =>
             {
                 options.UseMySql(connection, MySqlServerVersion.AutoDetect(connection));
+
             });
-            services.AddScoped<DbContext, PetHouseContext>();
+            //services.AddScoped<DbContext, PetHouseContext>();
 
             services.AddTransient<ExceptionHandlingMiddleware>();
 
@@ -50,7 +51,7 @@ namespace PetHouse.Api
             services.AddCors(options =>
                 options.AddPolicy(
                     ApiStaticConfigurations.AppName,
-                    builder =>
+                    (builder) =>
                     {
                         var origens = Configuration.GetSection(ApiStaticConfigurations.CorsHostsSection).Value?.Split(";") ?? Array.Empty<string>();
                         builder.WithOrigins(origens);
@@ -80,12 +81,12 @@ namespace PetHouse.Api
                     {
                         OnAuthenticationFailed = (context) =>
                         {
-                            Console.WriteLine("Token Invalido: " + context.Exception.Message);
+                            Console.WriteLine("Token Invalido: " + context.Exception.Message + Environment.NewLine);
                             return Task.CompletedTask;
                         },
                         OnTokenValidated = (context) =>
                         {
-                            Console.WriteLine("Token Validp: " + context.SecurityToken);
+                            Console.WriteLine("Token Valido: " + context.SecurityToken + Environment.NewLine);
                             return Task.CompletedTask;
                         }
                     };
@@ -100,7 +101,7 @@ namespace PetHouse.Api
              });
 
             //Swagger - habilita e config o framework
-            services.UseCustomSwagger();
+            services.ConfigureCustomSwagger();
         }
 
         public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env)

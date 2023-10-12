@@ -5,7 +5,7 @@ namespace PetHouse.Api.IoC
 {
     public static class SwaggerInjection
     {
-        public static void UseCustomSwagger(this IServiceCollection services)
+        public static void ConfigureCustomSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {

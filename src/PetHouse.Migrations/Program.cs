@@ -31,7 +31,7 @@ catch (Exception ex)
     ConsoleExtensions.ShowError($"Erro devido a: {ex.Message}");
     ConsoleExtensions.ShowError("");
     ConsoleExtensions.ShowError("Para executar o processo de migração, utilize da seguinte forma:");
-    ConsoleExtensions.ShowError("dotnet Escrituracao.ArquivosB3.Migracao <prod|dev> <Down|Up> <versao>");
+    ConsoleExtensions.ShowError("dotnet PetHouse.Migrations <prod|dev> <Down|Up> <versao>");
     ConsoleExtensions.ShowError("Quando for migração de atualização, é dispensável os parâmentros.");
 }
 
